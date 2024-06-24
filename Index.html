@@ -52,7 +52,7 @@
                 img.onload = () => resolve(img);
                 img.onerror = () => reject(src);
                 img.onclick = () => {
-                    window.opener.postMessage(src, window.opener.location.origin);
+                    window.opener.postMessage(src, 'https://tu-usuario.github.io'); // Cambiar el origen según corresponda
                 };
                 galleryDiv.appendChild(img);
             });
