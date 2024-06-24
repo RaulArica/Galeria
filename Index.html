@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Muñecos Amigurumi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+        }
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Galería de Muñecos Amigurumi</h1>
+    <div class="gallery">
+        <!-- Las imágenes se insertarán aquí mediante un script -->
+    </div>
+    <script>
+        const galleryDiv = document.querySelector('.gallery');
+        const imagePath = "Galeria_Muñecos/"; // Ajusta la ruta aquí si es necesario
+        const maxConsecutiveErrors = 10; // Número máximo de errores consecutivos permitidos
+
+        const loadImage = async (src) => {
+            return new Promise((resolve, reject) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Muñeco Amigurumi`;
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(src);
+            });
+        };
+
+        const loadGallery = async () => {
+            let consecutiveErrors = 0;
+            for (let i = 1; ; i++) {
+                const imgSrc = `${imagePath}M_${i}.jpg`;
+                try {
+                    const img = await loadImage(imgSrc);
+                    galleryDiv.appendChild(img);
+                    consecutiveErrors = 0; // Reset consecutive errors on successful load
+                } catch (src) {
+                    console.error(`Error loading image: ${src}`);
+                    consecutiveErrors++;
+                    if (consecutiveErrors >= maxConsecutiveErrors) {
+                        break;
+                    }
+                }
+            }
+        };
+
+        loadGallery();
+    </script>
+</body>
+</html>
