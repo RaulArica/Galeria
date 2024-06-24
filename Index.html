@@ -52,7 +52,8 @@
                 img.onload = () => resolve(img);
                 img.onerror = () => reject(src);
                 img.onclick = () => {
-                    window.opener.postMessage(src, 'https://tu-usuario.github.io'); // Cambiar el origen según corresponda
+                    window.opener.postMessage(src, '*'); // Cambiado a '*' para pruebas
+                    console.log(`Image clicked: ${src}`); // Depuración
                 };
                 galleryDiv.appendChild(img);
             });
