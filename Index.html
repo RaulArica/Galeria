@@ -57,6 +57,7 @@
                     const fullURL = `${baseURL}${src}${rawParam}`;
                     window.opener.postMessage(fullURL, '*'); // Enviar URL completa
                     console.log(`Image clicked: ${fullURL}`); // Depuración
+                    window.close();
                 };
                 galleryDiv.appendChild(img);
             });
