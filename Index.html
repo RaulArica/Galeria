@@ -41,9 +41,10 @@
     <script>
         const galleryDiv = document.querySelector('.gallery');
         const imagePath = "Galeria_Muñecos/"; // Ajusta la ruta aquí si es necesario
+        const baseURL = "https://github.com/RaulArica/RaulArica.github.io/blob/main/"; // Base URL
         const maxConsecutiveErrors = 10; // Número máximo de errores consecutivos permitidos
 
-        // Función para cargar una imagen y manejar errores de carga
+        // Función para cargar una imagen y manejar errores de carga 
         const loadImage = async (src) => {
             return new Promise((resolve, reject) => {
                 const img = document.createElement('img');
@@ -52,8 +53,9 @@
                 img.onload = () => resolve(img);
                 img.onerror = () => reject(src);
                 img.onclick = () => {
-                    window.opener.postMessage(src, '*'); // Cambiado a '*' para pruebas
-                    console.log(`Image clicked: ${src}`); // Depuración
+                    const fullURL = `${baseURL}${src}`;
+                    window.opener.postMessage(fullURL, '*'); // Enviar URL completa
+                    console.log(`Image clicked: ${fullURL}`); // Depuración
                 };
                 galleryDiv.appendChild(img);
             });
